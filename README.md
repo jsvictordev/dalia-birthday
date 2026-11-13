@@ -52,12 +52,12 @@ Coloca un archivo autorizado en `public/music.mp3` y configura `music: 'music.mp
 1. Crea un repositorio, por ejemplo `dalia-birthday`, y sube estos archivos con `package-lock.json` a la rama `main`.
 2. En Settings → Pages → Build and deployment selecciona **GitHub Actions**.
 3. El workflow `.github/workflows/deploy.yml` ejecuta `npm ci`, TypeScript, lint y build; publica `dist/`.
-4. La acción oficial de Pages obtiene el `base_path` del repositorio y lo pasa como `VITE_BASE_PATH` al build. Funciona bajo `https://USUARIO.github.io/dalia-birthday/`.
+4. El workflow configura `VITE_BASE_PATH: /` para publicar en la raíz de `https://dalia.zira.dev/`. Si vuelves a usar exclusivamente la URL de repositorio `https://USUARIO.github.io/dalia-birthday/`, cambia ese valor a `/dalia-birthday/`.
 5. Configura `publicUrl` y los metadatos absolutos de `index.html` con tu URL real.
 
 El base local predeterminado es `./`. Para otra plataforma puedes pasar `VITE_BASE_PATH=/subcarpeta/ npm run build`. No hay rutas de aplicación que necesiten rewrites: la navegación usa anclas dentro de la misma página.
 
-Para un dominio personalizado, configúralo en Settings → Pages, activa HTTPS y agrega el CNAME que indique GitHub en `public/CNAME`. La acción de Pages ajusta su base al dominio. Actualiza `publicUrl`, `og:url` y `og:image`.
+Para un dominio personalizado, configúralo en Settings → Pages, activa HTTPS y agrega el CNAME que indique GitHub en `public/CNAME`. El workflow ya utiliza `/` como base para `dalia.zira.dev`. Actualiza `publicUrl`, `og:url` y `og:image`.
 
 Para actualizar: edita, ejecuta las tres comprobaciones, haz commit y push a `main`; Actions desplegará la nueva versión. Este proyecto prepara la automatización; no crea repositorios ni publica por sí solo desde tu computadora.
 

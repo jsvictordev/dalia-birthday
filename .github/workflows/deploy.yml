@@ -26,7 +26,8 @@ jobs:
       - run: npm run lint
       - run: npm run build
         env:
-          VITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+          # El dominio dalia.zira.dev sirve la invitación desde la raíz.
+          VITE_BASE_PATH: /
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
